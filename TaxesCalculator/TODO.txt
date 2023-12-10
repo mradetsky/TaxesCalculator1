@@ -1,0 +1,7 @@
+﻿Implement DI for unit tests.
+Improve repository to use read db or commons storage(redis cache for example, if we not need read db)
+Store also calculations log to repository(db).
+Log exceptions by ILogger.
+Improve showing validation errors on client side.
+Implement Mapper
+Add page to manage Bands(if it need)

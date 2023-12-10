@@ -26,27 +26,27 @@
     <tbody>
         <tr>
             <td>Gross Annual Salary</td>
-            <td>{{ taxResults.grossAnnualSalary }}</td>
+            <td>{{ taxResults.grossAnnualSalary | number : '1.2-2' }}</td>
         </tr>
         <tr>
             <td>Gross Monthly Salary</td>
-            <td>{{ taxResults.grossMonthlySalary }}</td>
+            <td>{{ taxResults.grossMonthlySalary | number : '1.2-2' }}</td>
         </tr>
         <tr>
             <td>Net Anual Salary</td>
-            <td>{{ taxResults.netAnnualSalary}}</td>
+            <td>{{ taxResults.netAnnualSalary | number : '1.2-2'}}</td>
         </tr>
         <tr>
             <td>Net Monthly Salary</td>
-            <td>{{ taxResults.netMonthlySalary }}</td>
+            <td>{{ taxResults.netMonthlySalary | number : '1.2-2' }}</td>
         </tr>
         <tr>
             <td>Annual Tax Paid</td>
-            <td>{{ taxResults.annualTaxPaid }}</td>
+            <td>{{ taxResults.annualTaxPaid | number : '1.2-2' }}</td>
         </tr>
         <tr>
             <td>Monthly Tax Paid</td>
-            <td>{{ taxResults.monthlyTaxPaid }}</td>
+            <td>{{ taxResults.monthlyTaxPaid | number : '1.2-2' }}</td>
         </tr>
     </tbody>
 </table>

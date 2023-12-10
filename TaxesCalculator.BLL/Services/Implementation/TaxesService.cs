@@ -19,7 +19,7 @@ namespace TaxesCalculator.BLL.Services.Implementation
         }
         public TaxesCalculationResult Calculate(TaxesCalculationRequest request)
         {
-            var bands = this._bandRepository.GetAll();
+            var bands = this._bandRepository.GetAll().Where(x => x.IsActive);
             bands.ValidateBands();
             var taxes = bands.Sum(x => x.CalculateBandTaxes(request.Salary));
             

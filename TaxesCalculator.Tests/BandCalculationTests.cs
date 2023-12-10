@@ -40,7 +40,7 @@ namespace TaxesCalculator.Tests
                     new Band(){Id= 7, SalaryRangeFrom = 50, TaxRate = 20}, 75, 5
                 },
 
-
+                //salary 10000
                 new object[]{
                     new Band(){Id= 8, SalaryRangeTo = 5000, TaxRate = 0}, 10000, 0
                 },
@@ -50,7 +50,7 @@ namespace TaxesCalculator.Tests
                 new object[]{
                     new Band(){Id= 10, SalaryRangeFrom = 10000, TaxRate = 40}, 10000, 0
                 },
-
+                //salary 20000
                 new object[]{
                     new Band(){Id= 11, SalaryRangeTo = 5000, TaxRate = 0}, 40000, 0
                 },
