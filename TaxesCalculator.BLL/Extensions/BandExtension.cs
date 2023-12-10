@@ -18,14 +18,14 @@ namespace TaxesCalculator.BLL.Extensions
             }
             if (salary > band.SalaryRangeTo)
             {
-                salary = band.SalaryRangeTo ?? 0 - band.SalaryRangeFrom ?? 0;
+                salary = (band.SalaryRangeTo ?? 0) - (band.SalaryRangeFrom ?? 0);
             }
             else if (band.SalaryRangeFrom > 0)
             {
                 salary -= band.SalaryRangeFrom ?? 0;
             }
             
-            return salary * band.TaxRate;
+            return salary * band.TaxRate / 100;
         }
 
         public static void ValidateBands(this IEnumerable<Band> bands)
@@ -43,7 +43,7 @@ namespace TaxesCalculator.BLL.Extensions
             {
                 if (prevlimit != band.SalaryRangeFrom)
                 {
-                    throw new ValidationException("SalaryRangeFrom should be equal of SalaryRangeTo of previous band");
+                    throw new ValidationException("SalaryRangeFrom should be equal of SalaryRangeTo of previous band!");
                 }
                 prevlimit = band.SalaryRangeTo;
             }

@@ -23,6 +23,7 @@ namespace TaxesCalculator.BLL.Services.Implementation
             bands.ValidateBands();
             var taxes = bands.Sum(x => x.CalculateBandTaxes(request.Salary));
             
+            
             return new TaxesCalculationResult(request.Salary, taxes);
         }
     }

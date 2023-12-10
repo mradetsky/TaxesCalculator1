@@ -18,5 +18,10 @@ namespace TaxesCalculator.DAL.Entities
         public double TaxRate { get; set; }
         public bool IsActive { get; set; }
 
+        public override string ToString()
+        {
+            return Id.ToString(); // for tests.
+        }
+
     }
 }

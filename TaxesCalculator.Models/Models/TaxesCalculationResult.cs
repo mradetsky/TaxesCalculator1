@@ -7,12 +7,16 @@ namespace TaxesCalculator.Models.Results
 {
     public class TaxesCalculationResult
     {
+        public TaxesCalculationResult()
+        {
+
+        }
         public TaxesCalculationResult(double salary, double taxes)
         {
             this.GrossAnnualSalary = salary;
             this.AnnualTaxPaid = taxes;
         }
-        
+
         public double GrossAnnualSalary { get; set; }
 
         public double GrossMonthlySalary { get { return GrossAnnualSalary / 12; } }
@@ -24,6 +28,6 @@ namespace TaxesCalculator.Models.Results
         public double AnnualTaxPaid { get; set; }
 
         public double MonthlyTaxPaid { get { return AnnualTaxPaid / 12; } }
-        
-}
+
+    }
 }
