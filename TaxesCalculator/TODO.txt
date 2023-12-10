@@ -3,5 +3,5 @@ Improve repository to use read db or commons storage(redis cache for example, if
 Store also calculations log to repository(db).
 Log exceptions by ILogger.
 Improve showing validation errors on client side.
-Implement Mapper
+Implement AutoMapper
 Add page to manage Bands(if it need)
