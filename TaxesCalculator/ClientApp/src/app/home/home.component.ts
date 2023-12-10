@@ -6,13 +6,22 @@ import { Component, Inject } from '@angular/core';
     templateUrl: './home.component.html',
 })
 export class HomeComponent {
-    public taxResults: TaxesResult[];
+    public taxResults: TaxesResult;
     public loading: boolean;
     public salary: number;
-
+    private _baseUrl: string;
+    private _http: HttpClient;
+    
     constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
+        this._baseUrl = baseUrl;
+        this._http = http;
+        
+    }
+
+    public calculate() {
         this.loading = true;
-        http.get<TaxesResult[]>(baseUrl + 'taxes').subscribe(result => {
+        var request: TaxesRequest = { salary: this.salary };
+        this._http.post<TaxesResult>(this._baseUrl + 'taxes', request).subscribe(result => {
             this.taxResults = result;
             this.loading = false;
         }, error => {
@@ -20,15 +29,18 @@ export class HomeComponent {
             this.loading = false;
         });
     }
-
-    public calculate() {
-        alert(this.salary);
-    }
 }
 
+interface TaxesRequest {
+    salary: number;
+}
 
 interface TaxesResult {
-    resultType: string;
-    result: number;
 
+    grossAnnualSalary: number;
+    grossMonthlySalary: number;
+    netAnnualSalary: number;
+    netMonthlyAnnualSalary: number;
+    annualTaxPaid: number;
+    monthlyTaxPaid: number;
 }

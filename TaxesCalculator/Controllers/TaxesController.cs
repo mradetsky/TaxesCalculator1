@@ -4,7 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TaxesCalculator.BLL.Services;
 using TaxesCalculator.Models.Enums;
+using TaxesCalculator.Models.Models;
 using TaxesCalculator.Models.Results;
 
 namespace TaxesCalculator.Controllers
@@ -19,22 +21,17 @@ namespace TaxesCalculator.Controllers
         };
 
         private readonly ILogger<TaxesController> _logger;
+        private readonly ITaxesService _taxesService;
 
         public TaxesController(ILogger<TaxesController> logger)
         {
             _logger = logger;
         }
 
-        [HttpGet]
-        public IEnumerable<TaxesCalculationResult> Get()
+        [HttpPost]
+        public TaxesCalculationResult Get(TaxesCalculationRequest model)
         {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new TaxesCalculationResult
-            {
-                Result = rng.Next(-20, 55),
-                ResultType = (ResultType)rng.Next(0, 5)
-            })
-            .ToArray();
+            return _taxesService.Calculate(model);
         }
     }
 }

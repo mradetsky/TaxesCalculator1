@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TaxesCalculator.DAL\TaxesCalculator.DAL.csproj" />
     <ProjectReference Include="..\TaxesCalculator.Models\TaxesCalculator.Models.csproj" />
   </ItemGroup>
 

@@ -1,21 +1,47 @@
 <p *ngIf="loading"><em>Loading...</em></p>
 
-<input ng-model="salary"/>
-<input type="button" ng-click="calculate()"/>
+
+
+
+<div class="input-group mb-9">
+    <input id="salary" [(ngModel)]="salary" type="number" />
+    <div class="input-group-append">
+        <button class="btn btn-outline-secondary" type="button"(click)="calculate()">Calculate</button>
+    </div>
+</div>
 
 <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="taxResults">
     <thead>
         <tr>
-            <th>REsult Type</th>
+            <th>Result Type</th>
             <th>Result</th>
             
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let forecast of taxResults">
-            <td>{{ forecast.resultType }}</td>
-            <td>{{ forecast.result }}</td>
-          
+        <tr>
+            <td>Gross Annual Salary</td>
+            <td>{{ taxResults.grossAnnualSalary }}</td>
+        </tr>
+        <tr>
+            <td>Gross Monthly Salary</td>
+            <td>{{ taxResults.grossMonthlySalary }}</td>
+        </tr>
+        <tr>
+            <td>Net Anual Salary</td>
+            <td>{{ taxResults.netAnualSalary}}</td>
+        </tr>
+        <tr>
+            <td>Net Monthly Salary</td>
+            <td>{{ taxResults.netMonthlySalary }}</td>
+        </tr>
+        <tr>
+            <td>Annual Tax Paid</td>
+            <td>{{ taxResults.annualTaxPaid }}</td>
+        </tr>
+        <tr>
+            <td>Monthly Tax Paid</td>
+            <td>{{ taxResults.monthlyTaxPaid }}</td>
         </tr>
     </tbody>
 </table>

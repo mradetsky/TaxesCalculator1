@@ -6,22 +6,22 @@ namespace TaxesCalculator.DAL.Repositories.Implementation
 {
     public class BaseRepository<T> : IBaseRepository<T>
     {
-        public void Add(T entity)
+        public virtual void Add(T entity)
         {
             throw new NotImplementedException();
         }
 
-        public T Get(int id)
+        public virtual T Get(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<T> GetAll()
+        public virtual IEnumerable<T> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public void Remove(T entity)
+        public virtual void Remove(T entity)
         {
             throw new NotImplementedException();
         }
