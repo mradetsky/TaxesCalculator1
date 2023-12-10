@@ -28,9 +28,22 @@ export class HomeComponent {
             this.loading = false;
         }, error => {
             console.error(error);
-            this.error = error.error;
+            this.error = this.getError(error);
             this.loading = false;
         });
+    }
+
+    public getError(error: any) {
+        
+        if (error.error.errors) {
+            var errorText = "";
+            for (var key in error.error.errors) {
+                errorText += key + ":" + error.error.errors[key].join(", ");
+            }
+            return errorText;
+        }
+        else return error.error;
+
     }
 }
 

@@ -45,7 +45,7 @@ namespace TaxesCalculator.BLL.Extensions
                 {
                     throw new ValidationException("SalaryRangeFrom should be equal of SalaryRangeTo of previous band");
                 }
-                //prevlimit = band.SalaryRangeTo;
+                prevlimit = band.SalaryRangeTo;
             }
             
 
