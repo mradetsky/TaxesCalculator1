@@ -15,16 +15,14 @@ namespace TaxesCalculator.Controllers
     [Route("[controller]")]
     public class TaxesController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
+        
 
         private readonly ILogger<TaxesController> _logger;
         private readonly ITaxesService _taxesService;
 
-        public TaxesController(ILogger<TaxesController> logger)
+        public TaxesController(ITaxesService taxesService, ILogger<TaxesController> logger)
         {
+            _taxesService = taxesService;
             _logger = logger;
         }
 

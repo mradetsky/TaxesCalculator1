@@ -19,7 +19,7 @@ namespace TaxesCalculator.Models.Results
 
         public double NetAnnualSalary { get { return GrossAnnualSalary - AnnualTaxPaid; } }
 
-        public double NetMonthlyAnnualSalary { get { return NetAnnualSalary / 12; } }
+        public double NetMonthlySalary { get { return NetAnnualSalary / 12; } }
 
         public double AnnualTaxPaid { get; set; }
 
