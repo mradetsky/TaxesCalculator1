@@ -9,6 +9,7 @@ export class HomeComponent {
     public taxResults: TaxesResult;
     public loading: boolean;
     public salary: number;
+    public error: string;
     private _baseUrl: string;
     private _http: HttpClient;
     
@@ -20,12 +21,14 @@ export class HomeComponent {
 
     public calculate() {
         this.loading = true;
+        this.error = null;
         var request: TaxesRequest = { salary: this.salary };
         this._http.post<TaxesResult>(this._baseUrl + 'taxes', request).subscribe(result => {
             this.taxResults = result;
             this.loading = false;
         }, error => {
             console.error(error);
+            this.error = error.error;
             this.loading = false;
         });
     }

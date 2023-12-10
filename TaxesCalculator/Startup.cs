@@ -1,14 +1,19 @@
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.ComponentModel.DataAnnotations;
 using TaxesCalculator.BLL.Services;
 using TaxesCalculator.BLL.Services.Implementation;
 using TaxesCalculator.DAL.Repositories;
 using TaxesCalculator.DAL.Repositories.Implementation;
+using TaxesCalculator.Exception;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace TaxesCalculator
 {
@@ -33,21 +38,39 @@ namespace TaxesCalculator
             services.AddDistributedMemoryCache();
             services.AddScoped<IBandRepository, BandRepository>();
             services.AddScoped<ITaxesService, TaxesService>();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
+            app.UseExceptionHandler(exceptionHandlerApp =>
             {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
+                exceptionHandlerApp.Run(async context =>
+                {
+                    context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+
+                    // using static System.Net.Mime.MediaTypeNames;
+                    context.Response.ContentType = Text.Plain;
+
+                    await context.Response.WriteAsync("An exception was thrown.");
+
+                    var exceptionHandlerPathFeature =
+                        context.Features.Get<IExceptionHandlerPathFeature>();
+
+                    if (exceptionHandlerPathFeature?.Error is ValidationException)
+                    {
+                        await context.Response.WriteAsync(exceptionHandlerPathFeature?.Error.Message);
+                    }
+
+                    if (exceptionHandlerPathFeature?.Path == "/")
+                    {
+                        await context.Response.WriteAsync(" Page: Home.");
+                    }
+                });
+            });
+
+            app.UseHsts();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

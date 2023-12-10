@@ -9,6 +9,11 @@
         <button class="btn btn-outline-secondary" type="button"(click)="calculate()">Calculate</button>
     </div>
 </div>
+<div class="input-group mb-12" *ngIf="error">
+    <small class="text-danger">
+        {{error}}
+    </small>
+</div>
 
 <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="taxResults">
     <thead>
