@@ -1,0 +1,21 @@
+<p *ngIf="loading"><em>Loading...</em></p>
+
+<input ng-model="salary"/>
+<input type="button" ng-click="calculate()"/>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="taxResults">
+    <thead>
+        <tr>
+            <th>REsult Type</th>
+            <th>Result</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let forecast of taxResults">
+            <td>{{ forecast.resultType }}</td>
+            <td>{{ forecast.result }}</td>
+          
+        </tr>
+    </tbody>
+</table>
