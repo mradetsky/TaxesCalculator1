@@ -18,7 +18,7 @@ namespace TaxesCalculator.DAL.Repositories.Implementation
         }
         public virtual async Task AddAsync(T entity)
         {
-            _context.AddAsync(entity);
+            await _context.AddAsync(entity);
         }
 
         public virtual async Task<T> GetAsync(int id)
