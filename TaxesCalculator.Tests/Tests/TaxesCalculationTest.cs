@@ -2,14 +2,16 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Threading.Tasks;
 using TaxesCalculator.BLL.Extensions;
 using TaxesCalculator.BLL.Services;
 using TaxesCalculator.BLL.Services.Implementation;
 using TaxesCalculator.DAL.Entities;
 using TaxesCalculator.DAL.Repositories.Implementation;
+using TaxesCalculator.Tests.Fake;
 using TaxesCalculator.Tests.TestModels;
 
-namespace TaxesCalculator.Tests
+namespace TaxesCalculator.Tests.Tests
 {
     public class TaxesCalculationTest
     {
@@ -17,12 +19,12 @@ namespace TaxesCalculator.Tests
         [SetUp]
         public void Setup()
         {
-            _taxesService = new TaxesService(new BandRepository()); // TODO : implement DI
+            _taxesService = new TaxesService(new BandRepositoryFake()); // TODO : implement DI
         }
 
         public static List<object[]> TestCases = new List<object[]>()
             {
-                new object[]{                    
+                new object[]{
                     10000,
                     new CalculationResultTest()
                     {
@@ -51,10 +53,10 @@ namespace TaxesCalculator.Tests
 
         [Test]
         [TestCaseSource(nameof(TestCases))]
-        
-        public void TestCalculations(double salary, CalculationResultTest result)
+
+        public async Task TestCalculations(double salary, CalculationResultTest result)
         {
-            var res = _taxesService.Calculate(new Models.Models.TaxesCalculationRequest()
+            var res = await _taxesService.CalculateAsync(new Models.Models.TaxesCalculationRequest()
             {
                 Salary = salary
             });

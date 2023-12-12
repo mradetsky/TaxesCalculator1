@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using TaxesCalculator.BLL.Extensions;
 using TaxesCalculator.DAL.Repositories;
 using TaxesCalculator.Models.Models;
@@ -17,13 +19,10 @@ namespace TaxesCalculator.BLL.Services.Implementation
         {
             this._bandRepository = bandRepository;
         }
-        public TaxesCalculationResult Calculate(TaxesCalculationRequest request)
+        public async Task<TaxesCalculationResult> CalculateAsync(TaxesCalculationRequest request)
         {
-            var bands = this._bandRepository.GetAll().Where(x => x.IsActive);
-            bands.ValidateBands();
+            var bands = await this._bandRepository.GetActiveBandsForSalaryAsync(request.Salary);
             var taxes = bands.Sum(x => x.CalculateBandTaxes(request.Salary));
-            
-            
             return new TaxesCalculationResult(request.Salary, taxes);
         }
     }

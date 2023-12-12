@@ -27,9 +27,9 @@ namespace TaxesCalculator.Controllers
         }
 
         [HttpPost]
-        public TaxesCalculationResult Get(TaxesCalculationRequest model)
+        public Task<TaxesCalculationResult> PostAsync(TaxesCalculationRequest model)
         {
-            return _taxesService.Calculate(model);
+            return _taxesService.CalculateAsync(model);
         }
     }
 }

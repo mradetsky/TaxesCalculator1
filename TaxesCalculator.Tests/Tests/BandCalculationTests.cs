@@ -6,19 +6,19 @@ using TaxesCalculator.BLL.Extensions;
 using TaxesCalculator.DAL.Entities;
 
 
-namespace TaxesCalculator.Tests
+namespace TaxesCalculator.Tests.Tests
 {
     public class BandCalculationTests
     {
         [SetUp]
         public void Setup()
         {
-            
+
         }
 
         public static List<object[]> TestCases = new List<object[]>()
             {
-                new object[]{                    
+                new object[]{
                     new Band(){Id= 1, SalaryRangeTo = 100, TaxRate = 5}, 50, 2.5
                 },
                 new object[]{
@@ -65,7 +65,7 @@ namespace TaxesCalculator.Tests
 
         [Test]
         [TestCaseSource(nameof(TestCases))]
-        
+
         public void TestCalculations(Band band, double salary, double result)
         {
             var res = band.CalculateBandTaxes(salary);

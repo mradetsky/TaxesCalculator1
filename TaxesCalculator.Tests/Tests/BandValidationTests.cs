@@ -6,14 +6,14 @@ using TaxesCalculator.BLL.Extensions;
 using TaxesCalculator.DAL.Entities;
 
 
-namespace TaxesCalculator.Tests
+namespace TaxesCalculator.Tests.Tests
 {
     public class BandValidationTests
     {
         [SetUp]
         public void Setup()
         {
-            
+
         }
 
         public static List<object[]> TestCases = new List<object[]>()
@@ -49,7 +49,7 @@ namespace TaxesCalculator.Tests
 
         [Test]
         [TestCaseSource(nameof(TestCases))]
-        
+
         public void TestBandsValidation(List<Band> bands, string exception)
         {
             if (!string.IsNullOrEmpty(exception))
@@ -64,9 +64,9 @@ namespace TaxesCalculator.Tests
             {
                 bands.ValidateBands();
             }
-            
 
-            
+
+
         }
     }
 }

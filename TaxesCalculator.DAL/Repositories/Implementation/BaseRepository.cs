@@ -1,29 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace TaxesCalculator.DAL.Repositories.Implementation
 {
     public class BaseRepository<T> : IBaseRepository<T>
+        where T : class
     {
-        public virtual void Add(T entity)
+        private TaxesDbContext _context;
+        public BaseRepository(TaxesDbContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
+        }
+        public virtual async Task AddAsync(T entity)
+        {
+            _context.AddAsync(entity);
         }
 
-        public virtual T Get(int id)
+        public virtual async Task<T> GetAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _context.FindAsync<T>(id);
         }
 
-        public virtual IEnumerable<T> GetAll()
+        public virtual IQueryable<T> GetAll()
         {
-            throw new NotImplementedException();
+            return _context.Set<T>().AsNoTracking();
         }
 
-        public virtual void Remove(T entity)
+        public virtual async Task RemoveAsync(T entity)
         {
-            throw new NotImplementedException();
+            _context.Remove(entity);
         }
     }
 }

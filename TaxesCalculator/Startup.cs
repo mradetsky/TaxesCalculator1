@@ -14,6 +14,8 @@ using TaxesCalculator.DAL.Repositories;
 using TaxesCalculator.DAL.Repositories.Implementation;
 using TaxesCalculator.Exception;
 using static System.Net.Mime.MediaTypeNames;
+using TaxesCalculator.DAL;
+using Microsoft.EntityFrameworkCore;
 
 namespace TaxesCalculator
 {
@@ -39,6 +41,11 @@ namespace TaxesCalculator
             services.AddScoped<IBandRepository, BandRepository>();
             services.AddScoped<ITaxesService, TaxesService>();
             
+            
+            services.AddDbContext<TaxesDbContext>(
+                options => options.UseSqlServer(Configuration.GetConnectionString("TaxesDbContext")));
+            services.AddControllers();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

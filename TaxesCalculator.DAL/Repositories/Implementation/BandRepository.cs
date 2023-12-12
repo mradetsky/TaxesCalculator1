@@ -1,21 +1,28 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Threading.Tasks;
 using TaxesCalculator.DAL.Entities;
 
 namespace TaxesCalculator.DAL.Repositories.Implementation
 {
     public class BandRepository : BaseRepository<Band>, IBandRepository
     {
-        public override IEnumerable<Band> GetAll()
+        public BandRepository(TaxesDbContext context) : base(context)
         {
-            return new List<Band>()
-            {
-                new Band(){ Id = 1, Order = 1, Name = "Band A", SalaryRangeFrom = null, SalaryRangeTo = 5000, TaxRate = 0, IsActive = true },
-                new Band(){ Id = 2, Order = 2, Name = "Band B", SalaryRangeFrom = 5000, SalaryRangeTo = 20000, TaxRate = 20, IsActive = true },
-                new Band(){ Id = 3, Order = 3, Name = "Band C", SalaryRangeFrom = 20000, SalaryRangeTo = null, TaxRate = 40, IsActive = true },
 
-            };
+            
         }
+
+        public async Task<List<Band>> GetActiveBandsForSalaryAsync(double salary)
+        {
+            return await GetAll().Where(x => x.IsActive &&
+                (x.SalaryRangeFrom == null || x.SalaryRangeFrom <= salary)).ToListAsync();
+        }
+
     }
 }
